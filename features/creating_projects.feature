@@ -8,4 +8,6 @@ Scenario: Creating a project
   When I follow "New Project"
   And I fill in "Name" with "TextMate 2"
   And I press "Create Project"
-  Then I should see "Project has been created"
+  Then I should see "Project has been created."
+  And I should be on the project page for "TextMate 2"
+  Then I should see a title for "TextMate 2 - Projects - Ticketee"

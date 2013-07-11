@@ -41,6 +41,9 @@ When /^(.*) within ([^:]+):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
+Given /^(?:|I )am on (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
@@ -50,6 +53,9 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^(?:|I )follow "([^"]*)"$/ do |link|
+  click_link(link)
+end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
@@ -113,6 +119,11 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
     assert page.has_xpath?('//*', :text => regexp)
   end
 end
+
+Then /^(?:|I )should see a title for "([^"]*)"$/ do |text|
+  expect(page).to have_title text
+end
+
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   if page.respond_to? :should
